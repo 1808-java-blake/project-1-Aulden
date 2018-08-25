@@ -37,7 +37,7 @@ app.use(
 
 //serve start page
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/login-page/login.html'));
 });
 
 //setup body parser

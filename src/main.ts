@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import session from 'express-session';
+import {userRouter} from "./routers/user-router";
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.get('/', function(req, res){
 app.use(bodyParser.json());
 
 //ROUTERS
+app.use('/users', userRouter);
 
 //start listening
 const server = app.listen(port, () => {

@@ -4,12 +4,12 @@ export class ReimbRequest {
     submitted = '';
     resolved = '';
     description = '';
-    author = '';
-    resolver = '';
-    status = '';
-    type = '';
+    author = 0;
+    resolver = 0;
+    status = 0;
+    type = 0;
 
-    constructor(id?: number, amount?: number, submitted?: string, resolved?: string, description?: string, resolver?: string, author?: string, status?: string, type?: string){
+    constructor(id?: number, amount?: number, submitted?: string, resolved?: string, description?: string, resolver?: number, author?: number, status?: number, type?: number){
         id && (this.id = id);
         amount && (this.amount = amount);
         submitted && (this.submitted = submitted);

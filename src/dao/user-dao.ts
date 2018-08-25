@@ -59,7 +59,7 @@ export async function findById(id: number): Promise<User> {
                 ON x.reimb_status_id = ers.reimb_status_id) y
                 LEFT JOIN ers.ers_reimbursement_type ert
                 ON y.reimb_type_id = ert.reimb_type_id) z
-                WHERE z.ers_user_id = $1;`, [id]);
+             WHERE ers_users_id = $1;`, [id]);
         const user = userConverter(resp.rows[0]); // get the user data from first row
 
         // get the requests from all the rows

@@ -1,4 +1,3 @@
-
 export function authMiddleware(...roles: string[]) {
   return (req, resp, next) => {
     const user = req.session.user;

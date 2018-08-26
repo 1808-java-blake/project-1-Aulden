@@ -25,10 +25,15 @@ function login(event) {
     })
     .then(resp => {
       localStorage.setItem('user', JSON.stringify(resp));
-      window.location = 'http://localhost:3000/home/home.html';
+
+      if(resp.role === 'MANAGER'){
+        window.location = 'http://localhost:3000/manage/manage.html';
+      }
+      else {
+          window.location = 'http://localhost:3000/home/home.html';
+      }
     })
     .catch(err => {
       console.log(err);
     });
 }
-localStorage.clear();

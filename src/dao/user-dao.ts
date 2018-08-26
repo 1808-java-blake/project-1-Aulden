@@ -81,6 +81,8 @@ export async function findByUsernameAndPassword(username: string, password: stri
     try {
         const resp = await client.query(
             `SELECT * FROM ers.ers_users u
+            LEFT JOIN  ers.ers_user_roles r ON
+            u.user_role_id = r.ers_user_role_id
         WHERE u.ers_username = $1
         AND u.ers_password = $2`, [username, password]);
         if(resp.rows.length !== 0) {

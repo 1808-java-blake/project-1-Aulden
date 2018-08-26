@@ -9,11 +9,12 @@ export const requestRouter = express.Router(); // routers represent a subset of 
 /**
  * Find all reimbursement requests
  */
-requestRouter.get('', [authMiddleware('EMPLOYEE', 'MANAGER'),
+requestRouter.get('', [authMiddleware('MANAGER'),
     async (req: Request, resp: Response) => {
         try {
             console.log('retrieving all reimbursement requests');
             let requests = await requestDao.findAll();
+            // console.log(requests);
             resp.json(requests);
         } catch (err) {
             resp.sendStatus(500);
@@ -44,7 +45,7 @@ requestRouter.get('/:id', async (req, resp) => {
  * Create Request
  */
 requestRouter.post('',
-    [authMiddleware('MANAGER'), async (req, resp) => {
+    [authMiddleware('EMPLOYEE'), async (req, resp) => {
         try {
             const id = await requestDao.createReimbRequest(req.body);
             resp.status(201);

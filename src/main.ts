@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.set('port', port);
 
 const sess = {
-    secret: 'blub blob',
+    secret: 'keyboard cat',
     cookie: {secure: false},
     resave: false,
     saveUninitialized: false

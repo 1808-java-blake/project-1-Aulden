@@ -4,10 +4,10 @@ function addRequestToTable(request) {
   <tr>
     <th scope="row">${request.id}</th>
     <td>${request.amount}</td>
-    <td>${request.submitted}</td>
-    <td>${request.resolved}</td>
+    <td>${request.submitted.slice(0, 10)}</td>
+    <td>${request.resolved.slice(0, 10)}</td>
     <td>${request.description}</td>
-    <td>${request.author}</td>
+    <td>${JSON.parse(localStorage.getItem('user')).username}</td>
     <td>${request.resolver}</td>
     <td>${request.status}</td>
     <td>${request.type}</td>

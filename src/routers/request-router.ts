@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import * as requestDao from '../dao/reimb-request-dao';
+import {authMiddleware} from "../security/authorization-middleware";
 
 export const requestRouter = express.Router(); // routers represent a subset of routes for the express application
 
@@ -8,7 +9,7 @@ export const requestRouter = express.Router(); // routers represent a subset of 
 /**
  * Find all reimbursement requests
  */
-requestRouter.get('',
+requestRouter.get('', [authMiddleware('EMPLOYEE', 'MANAGER'),
     async (req: Request, resp: Response) => {
         try {
             console.log('retrieving all reimbursement requests');
@@ -17,7 +18,7 @@ requestRouter.get('',
         } catch (err) {
             resp.sendStatus(500);
         }
-    });
+    }]);
 
 /**
  * Find reimbursement request by id
@@ -43,7 +44,7 @@ requestRouter.get('/:id', async (req, resp) => {
  * Create Request
  */
 requestRouter.post('',
-    async (req, resp) => {
+    [authMiddleware('MANAGER'), async (req, resp) => {
         try {
             const id = await requestDao.createReimbRequest(req.body);
             resp.status(201);
@@ -52,7 +53,7 @@ requestRouter.post('',
             console.log(err);
             resp.sendStatus(500);
         }
-    });
+    }]);
 
 /**
  * Get reimbursements for specified user

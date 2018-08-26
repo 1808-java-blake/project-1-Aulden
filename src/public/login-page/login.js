@@ -31,3 +31,4 @@ function login(event) {
       console.log(err);
     });
 }
+localStorage.clear();

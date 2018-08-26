@@ -6,7 +6,9 @@ import {SqlReimbRequest} from "../dto/sql-reimb-request";
 export async function findAll(): Promise<ReimbRequest[]> {
     const client = await connectionPool.connect();
     try {
-        const resp = await client.query('SELECT * FROM ers.ers_reimbursement;');
+        const resp = await client.query(`SELECT * FROM ers.ers_reimbursement LEFT JOIN
+                                          ers.ers_reimbursement_status USING(reimb_status_id)
+                                          LEFT JOIN ers.ers_reimbursement_type USING(reimb_type_id);`);
         return resp.rows.map(reimbRequestConverter);
     } finally {
         client.release();
@@ -16,7 +18,10 @@ export async function findAll(): Promise<ReimbRequest[]> {
 export async function findById(id: number): Promise<ReimbRequest> {
     const client = await connectionPool.connect();
     try {
-        const resp = await client.query('SELECT * FROM ers.ers_reimbursement WHERE reimb_id = $1', [id]);
+        const resp = await client.query(`SELECT * FROM ers.ers_reimbursement LEFT JOIN
+                                          ers.ers_reimbursement_status USING(reimb_status_id)
+                                          LEFT JOIN ers.ers_reimbursement_type USING(reimb_type_id)
+                                          WHERE reimb_id = $1`, [id]);
         let movie: SqlReimbRequest = resp.rows[0];
         if (movie !== undefined) {
             return reimbRequestConverter(movie);

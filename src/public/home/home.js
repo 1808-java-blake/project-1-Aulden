@@ -1,15 +1,15 @@
-function addMovieToTable(movie) {
-  const tbody = document.getElementById('movie-table-body');
+function addMovieToTable(user) {
+  const tbody = document.getElementById('request-table-body');
   tbody.innerHTML += `
   <tr>
-    <th scope="row">${movie.title}</th>
-    <td>${movie.numBlades}</td>
-    <td>${movie.year}</td>
+    <th scope="row">${user.username}</th>
+    <td>${user.password}</td>
+    <td>${user.firstName}</td>
   </tr>
   `
 }
 
-fetch('http://localhost:9001/movies')
+fetch('http://localhost:3000/users')
   .then(res => res.json())
   .then(res => {
     res.forEach(movie => {
@@ -18,4 +18,4 @@ fetch('http://localhost:9001/movies')
   })
   .catch(err => {
     console.log(err);
-  })
+  });

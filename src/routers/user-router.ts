@@ -24,7 +24,7 @@ userRouter.get('', async (req: Request, resp: Response) => {
  */
 userRouter.get('/:id', async (req, resp) => {
     const id = +req.params.id; // convert the id to a number
-    console.log(`retrieving user with id  ${id}`)
+    console.log(`retrieving user with id  ${id}`);
     try {
         let user = await userDao.findById(id);
         if (user !== undefined) {

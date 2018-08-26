@@ -11,9 +11,9 @@ export const requestRouter = express.Router(); // routers represent a subset of 
 requestRouter.get('',
     async (req: Request, resp: Response) => {
         try {
-            console.log('retrieving all movies');
-            let movies = await requestDao.findAll();
-            resp.json(movies);
+            console.log('retrieving all reimbursement requests');
+            let requests = await requestDao.findAll();
+            resp.json(requests);
         } catch (err) {
             resp.sendStatus(500);
         }
@@ -24,7 +24,7 @@ requestRouter.get('',
  */
 requestRouter.get('/:id', async (req, resp) => {
     const id = +req.params.id; // convert the id to a number
-    console.log(`retrieving movie with id  ${id}`)
+    console.log(`retrieving request with id  ${id}`)
     try {
         let request = await requestDao.findById(id);
         if (request !== undefined) {
@@ -49,6 +49,23 @@ requestRouter.post('',
             resp.status(201);
             resp.json(id);
         } catch (err) {
+            console.log(err);
+            resp.sendStatus(500);
+        }
+    });
+
+/**
+ * Get reimbursements for specified user
+ */
+requestRouter.get('/user/:id',
+    async (req, resp) => {
+        try{
+            const id = +req.params.id;
+            console.log("Finding requests for user with id "+id);
+            let requests = await requestDao.findByUserId(id);
+            resp.json(requests);
+        }
+        catch (err) {
             console.log(err);
             resp.sendStatus(500);
         }

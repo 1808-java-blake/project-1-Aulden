@@ -1,27 +1,31 @@
 function createRequest(event) {
   event.preventDefault();
 
-  const title = document.getElementById('input-title').value;
-  const year = document.getElementById('input-year').value;
-  const numBlades = document.getElementById('input-number-blades').value;
+  const amount = document.getElementById('input-amount').value;
+  const description = document.getElementById('input-description').value;
+  const type = document.getElementById('input-type').value;
+  const author = JSON.parse(localStorage.getItem('user')).username;
+  const password = JSON.parse(localStorage.getItem('user')).password;
 
-  const movie = {
-    title,
-    year,
-    numBlades
-  }
+  const request = {
+    amount,
+    description,
+    type,
+    author,
+    password
+  };
   
-  fetch('http://localhost:9001/movies', {
+  fetch('http://localhost:3000/requests', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(movie)
+    body: JSON.stringify(request)
   })
   .then(resp => resp.json())
   .then(resp => {
-    window.location = 'http://localhost:9001/home/home.html';
+    window.location = 'http://localhost:3000/home/home.html';
   })
   .catch(err => {
     console.log(err);

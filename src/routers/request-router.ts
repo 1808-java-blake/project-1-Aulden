@@ -72,3 +72,41 @@ requestRouter.get('/user/:id',
             resp.sendStatus(500);
         }
     });
+
+/**
+ * Approve a request
+ */
+requestRouter.put('/approve/:id',
+        [authMiddleware("MANAGER"),
+        async (req, resp) => {
+            try{
+                const user = req.session.user;
+                const id = +req.params.id;
+                await requestDao.approveRequest(id, user);
+                resp.json(true);
+            }
+            catch (err) {
+                console.log(err);
+                resp.sendStatus(500);
+            }
+        }]
+);
+
+/**
+ * Deny a request
+ */
+requestRouter.put('/deny/:id',
+    [authMiddleware("MANAGER"),
+        async (req, resp) => {
+            try{
+                const user = req.session.user;
+                const id = +req.params.id;
+                await requestDao.denyRequest(id, user);
+                resp.json(true);
+            }
+            catch (err) {
+                console.log(err);
+                resp.sendStatus(500);
+            }
+        }]
+);

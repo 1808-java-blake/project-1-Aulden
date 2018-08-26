@@ -73,7 +73,7 @@ export async function findById(id: number): Promise<User> {
 }
 
 /**
- * Retreive a single user by username and password, will also retreive all of that users movies
+ * Retreive a single user by username and password, will also retrieve all of that users requests
  * @param id
  */
 export async function findByUsernameAndPassword(username: string, password: string): Promise<User> {
@@ -112,20 +112,3 @@ export async function create(user: User): Promise<number> {
         client.release();
     }
 }
-
-/**
- * Add a request to a users list
- * @param movieId
- * @param userId
- */
-/*export async function addRequestToUser(requestId: number, userId: number): Promise<any> {
-    const client = await connectionPool.connect();
-    try {
-        const resp = await client.query(
-            `INSERT INTO movies.users_movies 
-        (user_id, movie_id)
-        VALUES ($1, $2)`, [userId, movieId]);
-    } finally {
-        client.release();
-    }
-}*/

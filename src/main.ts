@@ -6,6 +6,7 @@ import {userRouter} from "./routers/user-router";
 import {requestRouter} from "./routers/request-router";
 
 const app = express();
+const favicon = require('serve-favicon');
 
 //set port
 const port = process.env.PORT || 3000;
@@ -25,6 +26,8 @@ if (app.get('env') === 'production') {
 
 //register session
 app.use(session(sess));
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 //log requests
 app.use((req, res, next) => {

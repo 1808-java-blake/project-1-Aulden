@@ -1,5 +1,14 @@
 function addRequestToTable(request) {
   const tbody = document.getElementById('request-table-body');
+
+  let resolver = 0;
+  if(request.resolver === 0){
+      resolver = "N/A";
+  }
+  else{
+      resolver = request.resolver;
+  }
+
   let appr = "";
   if(request.status === "PENDING"){
     appr = `<select onchange="changeReqStatus(${request.id})">
@@ -17,7 +26,7 @@ function addRequestToTable(request) {
     <td>${request.resolved.slice(0, 10)}</td>
     <td>${request.description}</td>
     <td>${request.author}</td>
-    <td>${request.resolver}</td>
+    <td>${resolver}</td>
     <td>${request.status}</td>
     <td>${request.type}</td>
   </tr>

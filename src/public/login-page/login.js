@@ -37,3 +37,7 @@ function login(event) {
       console.log(err);
     });
 }
+
+function toRegister(){
+  window.location = 'http://localhost:3000/register-user/register.html';
+}

@@ -103,11 +103,11 @@ export async function create(user: User): Promise<number> {
     const client = await connectionPool.connect();
     try {
         const resp = await client.query(
-            `INSERT INTO movies.app_users 
-        (username, password, role)
-        VALUES ($1, $2, 'customer') 
-        RETURNING user_id`, [user.username, user.password]);
-        return resp.rows[0].user_id;
+            `INSERT INTO ers.ers_users 
+            (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
+             VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING ers_users_id`, [user.username, user.password, user.firstName, user.lastName, user.email, 2]);
+        return resp.rows[0].ers_users_id;
     } finally {
         client.release();
     }

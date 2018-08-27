@@ -44,8 +44,14 @@ userRouter.post('', async (req, resp) => {
     console.log('creating user');
     try {
         const id = await userDao.create(req.body);
-        resp.status(201);
-        resp.json(id);
+
+        const user = await userDao.findById(id);
+        if (user !== undefined) {
+            resp.status(200);
+            resp.json(user);
+        } else {
+            resp.sendStatus(400);
+        }
     } catch (err) {
         console.log(err);
         resp.sendStatus(500);

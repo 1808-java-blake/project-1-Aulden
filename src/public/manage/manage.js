@@ -77,13 +77,44 @@ function denial(id){
         });
 }
 
-fetch(`http://localhost:3000/requests`)
-  .then(res => res.json())
-  .then(res => {
-    res.forEach(request => {
-      addRequestToTable(request);
-    })
-  })
-  .catch(err => {
-    console.log(err);
-  });
+document.getElementById("sort").addEventListener("change", () => {
+    let val = document.getElementById("sort").value;
+
+
+    if(val === "default"){
+        getAll();
+    }
+    else{
+        getSpecific(val);
+    }
+});
+
+function getAll() {
+    fetch(`http://localhost:3000/requests`)
+        .then(res => res.json())
+        .then(res => {
+            document.getElementById("request-table-body").innerHTML = '';
+            res.forEach(request => {
+                addRequestToTable(request);
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+function getSpecific(val) {
+    fetch(`http://localhost:3000/requests/status/${val}`)
+        .then(res => res.json())
+        .then(res => {
+            document.getElementById("request-table-body").innerHTML = '';
+            res.forEach(request => {
+                addRequestToTable(request);
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+getAll();

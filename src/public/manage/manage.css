@@ -1,3 +1,8 @@
 #request-table-container {
   margin-top: 2.5em;
 }
+
+#sort {
+  width: auto;
+  margin-left: -15px;
+}

@@ -14,7 +14,6 @@ requestRouter.get('', [authMiddleware('MANAGER'),
         try {
             console.log('retrieving all reimbursement requests');
             let requests = await requestDao.findAll();
-            // console.log(requests);
             resp.json(requests);
         } catch (err) {
             resp.sendStatus(500);
@@ -26,7 +25,7 @@ requestRouter.get('', [authMiddleware('MANAGER'),
  */
 requestRouter.get('/:id', async (req, resp) => {
     const id = +req.params.id; // convert the id to a number
-    console.log(`retrieving request with id  ${id}`)
+    console.log(`retrieving request with id  ${id}`);
     try {
         let request = await requestDao.findById(id);
         if (request !== undefined) {
@@ -110,3 +109,17 @@ requestRouter.put('/deny/:id',
             }
         }]
 );
+
+/**
+ * Find reimbursement request by status
+ */
+requestRouter.get('/status/:stat', async (req, resp) => {
+    const stat = +req.params.stat; // convert the id to a number
+    console.log(`retrieving requests with status:  ${stat}`);
+    try {
+        let requests = await requestDao.findStatus(stat);
+        resp.json(requests);
+    } catch (err) {
+        resp.sendStatus(500);
+    }
+});

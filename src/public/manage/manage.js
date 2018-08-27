@@ -51,13 +51,13 @@ function changeReqStatus(id){
 }
 
 function approval(id){
-    fetch(`http://localhost:3000/requests/approve/${id}`, {
+    fetch(`../requests/approve/${id}`, {
         method: 'PUT',
         body: localStorage.getItem('user')
     })
         .then(resp => resp.json())
         .then(resp => {
-            window.location = 'http://localhost:3000/manage/manage.html';
+            window.location.href = 'manage.html';
         })
         .catch(err => {
             console.log(err);
@@ -65,12 +65,12 @@ function approval(id){
 }
 
 function denial(id){
-    fetch(`http://localhost:3000/requests/deny/${id}`, {
+    fetch(`../requests/deny/${id}`, {
         method: 'PUT',
     })
         .then(resp => resp.json())
         .then(resp => {
-            window.location = 'http://localhost:3000/manage/manage.html';
+            window.location.href = 'manage.html';
         })
         .catch(err => {
             console.log(err);
@@ -90,7 +90,7 @@ document.getElementById("sort").addEventListener("change", () => {
 });
 
 function getAll() {
-    fetch(`http://localhost:3000/requests`)
+    fetch(`../requests`)
         .then(res => res.json())
         .then(res => {
             document.getElementById("request-table-body").innerHTML = '';
@@ -104,7 +104,7 @@ function getAll() {
 }
 
 function getSpecific(val) {
-    fetch(`http://localhost:3000/requests/status/${val}`)
+    fetch(`../requests/status/${val}`)
         .then(res => res.json())
         .then(res => {
             document.getElementById("request-table-body").innerHTML = '';

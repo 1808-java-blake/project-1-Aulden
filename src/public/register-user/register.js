@@ -7,7 +7,7 @@ function registerUser(event) {
   let email = document.getElementById('inputEmail').value;
 
   const user = { username, password, firstName, lastName, email };
-  fetch('http://localhost:3000/users', {
+  fetch('../users', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,7 +27,7 @@ function registerUser(event) {
       throw 'Failed to register';
     })
     .then(resp => {
-      window.location = 'http://localhost:3000';
+      window.location.href = '../';
     })
     .catch(err => {
       console.log(err);

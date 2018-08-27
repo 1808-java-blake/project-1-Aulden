@@ -25,7 +25,7 @@ function addRequestToTable(request) {
 
 let user = JSON.parse(localStorage.getItem('user'));
 
-fetch(`http://localhost:3000/requests/user/${user.id}`)
+fetch(`../requests/user/${user.id}`)
   .then(res => res.json())
   .then(res => {
     res.forEach(request => {

@@ -4,7 +4,7 @@ function login(event) {
   let password = document.getElementById('inputPassword').value;
 
   const credentials = { username, password };
-  fetch('http://localhost:3000/users/login', {
+  fetch('users/login', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,10 +27,10 @@ function login(event) {
       localStorage.setItem('user', JSON.stringify(resp));
 
       if(resp.role === 'MANAGER'){
-        window.location = 'http://localhost:3000/manage/manage.html';
+        window.location.href = `manage/manage.html`;
       }
       else {
-          window.location = 'http://localhost:3000/home/home.html';
+          window.location.href = 'home/home.html';
       }
     })
     .catch(err => {
@@ -39,5 +39,5 @@ function login(event) {
 }
 
 function toRegister(){
-  window.location = 'http://localhost:3000/register-user/register.html';
+  window.location.href = 'register-user/register.html';
 }

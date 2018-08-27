@@ -40,6 +40,12 @@ app.use(
     express.static(path.join(__dirname, 'public'))
 );
 
+app.use('/public/create-request', express.static(__dirname + '/create-request'));
+app.use('/public/home', express.static(__dirname + '/public/home'));
+app.use('/public/login-page', express.static(__dirname + '/public/login-page'));
+app.use('/public/manage', express.static(__dirname + '/public/manage'));
+app.use('/public/register-user', express.static(__dirname + '/public/register-user'));
+
 //serve start page
 app.get('/', function(req, res){
     res.sendFile(path.join(__dirname, 'public/login-page/login.html'));

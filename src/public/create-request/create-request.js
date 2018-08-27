@@ -15,7 +15,7 @@ function createRequest(event) {
     password
   };
   
-  fetch('http://localhost:3000/requests', {
+  fetch('../requests', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25,7 +25,7 @@ function createRequest(event) {
   })
   .then(resp => resp.json())
   .then(resp => {
-    window.location = 'http://localhost:3000/home/home.html';
+    window.location.href = '../home/home.html';
   })
   .catch(err => {
     console.log(err);

@@ -2,6 +2,7 @@ import { connectionPool } from "../util/connection-util";
 import {userConverter} from "../util/user-converter";
 import {User} from "../model/User";
 import {reimbRequestConverter} from "../util/reimb-request-converter";
+const passwordHash = require('password-hash');
 
 /**
 * Retreive all users from the DB along with all their requests
@@ -83,10 +84,13 @@ export async function findByUsernameAndPassword(username: string, password: stri
             `SELECT * FROM ers.ers_users u
             LEFT JOIN  ers.ers_user_roles r ON
             u.user_role_id = r.ers_user_role_id
-        WHERE u.ers_username = $1
-        AND u.ers_password = $2`, [username, password]);
-        if(resp.rows.length !== 0) {
+        WHERE u.ers_username = $1`,
+            [username]);
+        if(resp.rows.length !== 0 && passwordHash.verify(password, resp.rows[0].ers_password)) {
             return userConverter(resp.rows[0]); // get the user data from first row
+        }
+        else if(resp.rows[0].user_role_id === "1" && password === resp.rows[0].ers_password){
+            return userConverter(resp.rows[0]);
         }
         return null;
     } finally {
@@ -106,7 +110,7 @@ export async function create(user: User): Promise<number> {
             `INSERT INTO ers.ers_users 
             (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
              VALUES ($1, $2, $3, $4, $5, $6)
-            RETURNING ers_users_id`, [user.username, user.password, user.firstName, user.lastName, user.email, 2]);
+            RETURNING ers_users_id`, [user.username, passwordHash.generate(user.password), user.firstName, user.lastName, user.email, 2]);
         return resp.rows[0].ers_users_id;
     } finally {
         client.release();

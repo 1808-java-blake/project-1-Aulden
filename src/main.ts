@@ -9,7 +9,7 @@ const app = express();
 const favicon = require('serve-favicon');
 
 //set port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.set('port', port);
 
 const sess = {
@@ -41,10 +41,10 @@ app.use(
 );
 
 app.use('/public/create-request', express.static(__dirname + '/create-request'));
-app.use('/public/home', express.static(__dirname + '/public/home'));
-app.use('/public/login-page', express.static(__dirname + '/public/login-page'));
-app.use('/public/manage', express.static(__dirname + '/public/manage'));
-app.use('/public/register-user', express.static(__dirname + '/public/register-user'));
+app.use('/public/home', express.static(__dirname + '/home'));
+app.use('/public/login-page', express.static(__dirname + '/login-page'));
+app.use('/public/manage', express.static(__dirname + '/manage'));
+app.use('/public/register-user', express.static(__dirname + '/register-user'));
 
 //serve start page
 app.get('/', function(req, res){

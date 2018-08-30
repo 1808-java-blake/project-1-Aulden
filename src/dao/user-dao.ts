@@ -87,9 +87,11 @@ export async function findByUsernameAndPassword(username: string, password: stri
         WHERE u.ers_username = $1`,
             [username]);
         if(resp.rows.length !== 0 && passwordHash.verify(password, resp.rows[0].ers_password)) {
+            resp.rows[0].ers_password = password;
             return userConverter(resp.rows[0]); // get the user data from first row
         }
-        else if(resp.rows[0].user_role_id === "1" && password === resp.rows[0].ers_password){
+        else if(resp.rows.length !== 0 && resp.rows[0].user_role_id === "1" && password === resp.rows[0].ers_password){
+            resp.rows[0].ers_password = password;
             return userConverter(resp.rows[0]);
         }
         return null;

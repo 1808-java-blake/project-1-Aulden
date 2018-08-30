@@ -15,9 +15,10 @@
   </head>
 
   <body class="text-center signin-container">
+  <div id="login">
     <form class="form-signin" onsubmit="login(event)">
       <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 font-weight-normal" id="msg">Please sign in</h1>
       <label for="inputUsername" class="sr-only">Username</label>
       <input type="text" id="inputUsername" class="form-control" placeholder="Username" autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
@@ -26,6 +27,19 @@
       <button class="btn btn-lg btn-block" onclick="toRegister()">Register</button>
       <p id="error-message"></p>
     </form>
+  </div>
+
+    <div class="waveWrapper waveAnimation">
+      <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png')"></div>
+      </div>
+      <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
+      </div>
+      <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
+      </div>
+    </div>
 
 
     <script src="login-page/login.js"></script>

@@ -2,7 +2,12 @@
   margin-top: 2.5em;
 }
 
+html {
+  height: 100%;
+}
+
 body{
   background: linear-gradient(to top, #86377b 20%, #27273c 80%) no-repeat center center fixed;
   background-size: cover;
+  height: 100%;
 }
